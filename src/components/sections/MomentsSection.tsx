@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Flower2, Sparkles } from 'lucide-react';
 
 const moments = [
   {
@@ -23,9 +22,9 @@ const moments = [
   },
   {
     image: "https://placehold.co/600x400.png",
-    title: "Karaoke Nights",
-    description: "Our karaoke duets are legendary. Singing our hearts out with you is pure joy, even if we're off-key.",
-    hint: "karaoke singing"
+    title: "Jamming to Music",
+    description: "Whether we're playing our instruments or singing our hearts out at karaoke, making music with you is pure joy.",
+    hint: "jamming music"
   },
   {
     image: "https://placehold.co/600x400.png",
@@ -34,10 +33,10 @@ const moments = [
     hint: "shopping mall"
   },
   {
-    image: "/moments/kitchen.png",
-    title: "Our Quiet Moments",
-    description: "Sometimes the best moments are the quiet ones, just enjoying each other's company at home.",
-    hint: "couple relaxing"
+    image: "https://placehold.co/600x400.png",
+    title: "Art Gallery Date",
+    description: "Exploring the art gallery with you was so inspiring. Seeing the world through your eyes makes everything more beautiful.",
+    hint: "art gallery"
   }
 ];
 
