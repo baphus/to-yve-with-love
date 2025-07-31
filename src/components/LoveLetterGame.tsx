@@ -163,10 +163,8 @@ export function LoveLetterGame() {
         )}
 
         {/* Character Sprite */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center pointer-events-none">
-            <div className="relative w-[500px] h-[700px]">
-                <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
-            </div>
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-[600px] h-[800px] pointer-events-none">
+            <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
         </div>
         
         {/* Name Tag */}
