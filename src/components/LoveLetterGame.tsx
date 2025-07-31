@@ -34,8 +34,8 @@ const gameData = {
     },
     askDate: {
         image: '/me-happy.png',
-        reply: "So... since you know how much you mean to me, would you go on a date with me to SM City? We can go for a 'laag' and have dinner in Cebu.",
-        options: ["YES!!"],
+        reply: "So... since you know how much you mean to me, would you go on a date with me to SM City? We can go laag and have dinner sa City.",
+        options: ["YES!!!"],
         nextStage: 'end'
     }
 };
