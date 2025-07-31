@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Flower2, Sparkles } from 'lucide-react';
 
 const moments = [
   {
@@ -42,7 +43,10 @@ const moments = [
 
 export function MomentsSection() {
   return (
-    <section id="moments" className="w-full py-20 lg:py-32 bg-background">
+    <section id="moments" className="w-full py-20 lg:py-32 bg-background relative overflow-hidden">
+      <Flower2 className="sticker top-24 left-8 opacity-50 -rotate-12" />
+      <Sparkles className="sticker bottom-1/4 right-8 opacity-50 rotate-12" />
+
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-headline text-4xl md:text-5xl text-primary-foreground">Our Favorite Moments</h2>

@@ -1,58 +1,134 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Heart, MessageSquare, Smile, Star, Sun } from "lucide-react";
+'use client';
+import { useState } from 'react';
+import { Heart, MessageSquare, Smile, Star, Sun, BrainCircuit, Mail, MailOpen } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const letters = [
   {
-    icon: <Sun className="h-5 w-5 text-accent-foreground" />,
-    title: "You Light Up My World",
-    content: "Seriously, your presence is like sunshine on a cloudy day. Your energy is infectious, and you make everything better just by being you. The world feels brighter and full of color with you in it."
+    icon: <Sun className="h-6 w-6 text-yellow-500" />,
+    title: 'You Light Up My World',
+    content:
+      'Seriously, your presence is like sunshine on a cloudy day. Your energy is infectious, and you make everything better just by being you. The world feels brighter and full of color with you in it.',
   },
   {
-    icon: <Smile className="h-5 w-5 text-accent-foreground" />,
-    title: "Your Breathtaking Beauty",
-    content: "I know you sometimes don't see it, but you are the most beautiful person I've ever known, inside and out. It's not just your smile or your eyes, but the way you carry yourself with grace and kindness."
+    icon: <Smile className="h-6 w-6 text-pink-500" />,
+    title: 'Your Breathtaking Beauty',
+    content:
+      "I know you sometimes don't see it, but you are the most beautiful person I've ever known, inside and out. It's not just your smile or your eyes, but the way you carry yourself with grace and kindness.",
   },
   {
-    icon: <Star className="h-5 w-5 text-accent-foreground" />,
-    title: "Your Incredible Ambition",
-    content: "Watching you chase your dreams is one of my favorite things. You're so driven, passionate, and intelligent. You inspire me every single day to be a better person. I have no doubt you'll achieve everything you set your mind to."
+    icon: <Star className="h-6 w-6 text-purple-500" />,
+    title: 'Your Incredible Ambition',
+    content:
+      "Watching you chase your dreams is one of my favorite things. You're so driven, passionate, and intelligent. You inspire me every single day to be a better person. I have no doubt you'll achieve everything you set your mind to.",
+  },
+    {
+    icon: <BrainCircuit className="h-6 w-6 text-teal-500" />,
+    title: 'Your Creative Mind',
+    content:
+      "Your creativity knows no bounds, and the way your mind works constantly surprises and amazes me. From your brilliant ideas to your unique perspective on life, you make the world a far more interesting place.",
   },
   {
-    icon: <MessageSquare className="h-5 w-5 text-accent-foreground" />,
-    title: "The Way You Talk... A Lot!",
-    content: "And I wouldn't have it any other way. I love listening to you talk about your day, your passions, or even just random thoughts. Your voice is my favorite sound, and your stories are my favorite tales. Please never stop sharing your world with me."
+    icon: <MessageSquare className="h-6 w-6 text-blue-500" />,
+    title: 'The Way You Talk... A Lot!',
+    content:
+      "And I wouldn't have it any other way. I love listening to you talk about your day, your passions, or even just random thoughts. Your voice is my favorite sound, and your stories are my favorite tales. Please never stop sharing your world with me.",
   },
   {
-    icon: <Heart className="h-5 w-5 text-accent-foreground" />,
-    title: "Your Heart of Gold",
-    content: "You care so deeply for the people around you. Your compassion and empathy are boundless. You have a way of making everyone feel seen and loved, and I'm the luckiest of all to be the main recipient of that love."
-  }
+    icon: <Heart className="h-6 w-6 text-red-500" />,
+    title: 'Your Heart of Gold',
+    content:
+      "You care so deeply for the people around you. Your compassion and empathy are boundless. You have a way of making everyone feel seen and loved, and I'm the luckiest of all to be the main recipient of that love.",
+  },
 ];
 
-export function LoveLettersSection() {
+function LoveLetter({
+  letter,
+  isOpen,
+  onClick,
+}: {
+  letter: (typeof letters)[0];
+  isOpen: boolean;
+  onClick: () => void;
+}) {
   return (
-    <section id="love-letters" className="w-full py-20 lg:py-32 bg-primary/10">
-      <div className="container mx-auto max-w-3xl px-4">
-        <div className="text-center mb-12">
+    <div className="w-full">
+      <div
+        className="relative w-full cursor-pointer transition-all duration-500 [perspective:1000px]"
+        onClick={onClick}
+      >
+        <div
+          className={cn(
+            'w-full transform-style-3d transition-transform duration-700',
+            isOpen ? '[transform:rotateX(180deg)]' : ''
+          )}
+        >
+          {/* Front of the card (closed envelope) */}
+          <div className="absolute inset-0 backface-hidden">
+            <div className="h-48 rounded-lg bg-secondary shadow-lg flex items-center justify-center p-4 border-2 border-primary/50 relative overflow-hidden">
+               <div className="absolute top-0 left-0 w-full h-1/2 bg-accent/30" style={{clipPath: 'polygon(0 0, 100% 0, 50% 100%)'}}></div>
+               <Mail className="h-16 w-16 text-primary-foreground/50"/>
+               <p className="absolute bottom-4 font-headline text-xl text-primary-foreground">{letter.title}</p>
+            </div>
+          </div>
+
+          {/* Back of the card (opened letter) */}
+          <div className="w-full [transform:rotateX(180deg)] backface-hidden">
+            <div className="bg-card/80 backdrop-blur-sm rounded-lg shadow-2xl border-2 border-accent/40 p-6 min-h-48">
+              <div className="flex items-center gap-4 mb-4">
+                {letter.icon}
+                <h3 className="font-headline text-xl text-primary-foreground">{letter.title}</h3>
+              </div>
+              <p className="font-body text-base text-foreground/90">{letter.content}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Spacer to prevent layout shift */}
+      <div
+        className={cn(
+          'overflow-hidden transition-[max-height] duration-700 ease-in-out',
+          isOpen ? 'max-h-96' : 'max-h-48'
+        )}
+      >
+        <div className="h-48" />
+      </div>
+    </div>
+  );
+}
+
+
+export function LoveLettersSection() {
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+    const handleLetterClick = (index: number) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+
+  return (
+    <section id="love-letters" className="relative w-full py-20 lg:py-32 bg-primary/20 overflow-hidden">
+      <Heart className="sticker top-16 left-12 rotate-[-20deg]" />
+      <Star className="sticker bottom-24 right-16 rotate-[15deg]" />
+      <div className="container mx-auto max-w-3xl px-4 z-10">
+        <div className="text-center mb-16">
           <h2 className="font-headline text-4xl md:text-5xl text-primary-foreground">Things I Love About You</h2>
           <p className="mt-2 font-body text-lg text-foreground/80">Just a few of the countless reasons...</p>
         </div>
-        <Accordion type="single" collapsible className="w-full space-y-4">
+         <div className="space-y-[-10rem] md:space-y-[-11rem]">
           {letters.map((letter, index) => (
-            <AccordionItem key={index} value={`item-${index}`} className="bg-card/80 backdrop-blur-sm border-accent/20 rounded-lg shadow-lg transition-all hover:shadow-xl hover:border-accent/40">
-              <AccordionTrigger className="p-6 font-headline text-lg hover:no-underline text-primary-foreground">
-                <div className="flex items-center gap-4">
-                  {letter.icon}
-                  {letter.title}
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="px-6 pb-6 font-body text-base text-foreground/90">
-                {letter.content}
-              </AccordionContent>
-            </AccordionItem>
+             <LoveLetter 
+                key={index} 
+                letter={letter} 
+                isOpen={openIndex === index}
+                onClick={() => handleLetterClick(index)}
+            />
           ))}
-        </Accordion>
+        </div>
       </div>
     </section>
   );
 }
+
+// Add these to globals.css or a style tag if needed for tailwind JIT
+// .transform-style-3d { transform-style: preserve-3d; }
+// .backface-hidden { backface-visibility: hidden; }

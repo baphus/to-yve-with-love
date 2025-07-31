@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Sprout, Cat, Star } from 'lucide-react';
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-background to-primary/10">
+    <section id="hero" className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-background to-primary/20">
       <div className="absolute inset-0 z-0 opacity-20">
         <Image
           src="https://placehold.co/1920x1080.png"
@@ -12,9 +12,14 @@ export function HeroSection() {
           fill
           priority
           className="object-cover"
-          data-ai-hint="ethereal pastel"
+          data-ai-hint="ethereal pastel flowers"
         />
       </div>
+      
+      <Sprout className="sticker top-1/4 left-8 -rotate-12" />
+      <Cat className="sticker top-1/2 right-12 rotate-6" />
+      <Star className="sticker bottom-1/4 left-16 rotate-12" />
+      
       <div className="container z-10 flex flex-col items-center text-center px-4">
         <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl text-primary-foreground drop-shadow-lg">
           To My Dearest Yve
