@@ -5,62 +5,88 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { getLoveLetterResponse, LoveLetterResponse } from '@/ai/flows/loveLetterFlow';
 import { Loader2 } from 'lucide-react';
 import { Textarea } from './ui/textarea';
 
-type Message = {
-  sender: 'user' | 'ai';
-  text: string;
+const gameData = {
+    start: {
+        reply: "Hey... um, can I talk to you for a second?",
+        options: ["Of course! What's up?", "Is everything okay?"],
+        nextStage: 'reassure',
+    },
+    reassure: {
+        reply: "Everything's great! I just... well, I have something for you.",
+        options: ["Oh? For me?", "What is it?"],
+        nextStage: 'reveal',
+    },
+    reveal: {
+        reply: "I'm not the best with words sometimes, so I wrote this down. It's... it's for you.",
+        options: ["A letter? For me?", "You wrote me a letter?"],
+        nextStage: 'final',
+    },
+    final: {
+        reply: "Here...",
+        options: [],
+        finalLetter: `I made this whole website for you to show how much I truly love you. I will always be there for you, and I hope this little world gives you comfort and makes you feel as appreciated and loved as you deserve.\n\nWith all my love.`,
+        nextStage: 'end',
+    }
 };
 
+type GameStage = keyof typeof gameData;
+
 export function LoveLetterGame() {
-  const [gameState, setGameState] = useState<LoveLetterResponse | null>(null);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [currentStage, setCurrentStage] = useState<GameStage | null>(null);
+  const [messages, setMessages] = useState<{ sender: 'ai' | 'user'; text: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [finalLetter, setFinalLetter] = useState('');
 
-  const startGame = async () => {
-    setIsLoading(true);
-    const response = await getLoveLetterResponse('start', '');
-    setGameState(response);
-    setMessages([{ sender: 'ai', text: response.reply }]);
-    setIsLoading(false);
-  };
-
-  const handleOptionClick = async (choice: string) => {
-    if (!gameState) return;
-
-    setIsLoading(true);
-    setMessages((prev) => [...prev, { sender: 'user', text: choice }]);
-    const response = await getLoveLetterResponse(gameState.nextStage, choice);
-    
-    setMessages((prev) => [...prev, { sender: 'ai', text: response.reply }]);
-
-    if (response.nextStage === 'final') {
-        const finalResponse = await getLoveLetterResponse('final', '');
-        setMessages((prev) => [...prev, { sender: 'ai', text: finalResponse.reply }]);
-        setIsFinished(true);
+  const handleNextStage = (stage: GameStage, userChoice?: string) => {
+    if (userChoice) {
+        setMessages((prev) => [...prev, { sender: 'user', text: userChoice }]);
     }
+
+    const stageData = gameData[stage];
     
-    setGameState(response);
-    setIsLoading(false);
+    setTimeout(() => {
+        setMessages((prev) => [...prev, { sender: 'ai', text: stageData.reply }]);
+        setCurrentStage(stage);
+        
+        if (stage === 'final') {
+            setFinalLetter(stageData.finalLetter);
+            setIsFinished(true);
+        }
+        setIsLoading(false);
+    }, 500);
+  }
+
+  const startGame = () => {
+    setIsLoading(true);
+    handleNextStage('start');
   };
 
-  if (isFinished && gameState?.finalLetter) {
+  const handleOptionClick = (choice: string) => {
+    if (!currentStage) return;
+
+    setIsLoading(true);
+    const nextStageKey = gameData[currentStage].nextStage as GameStage;
+    handleNextStage(nextStageKey, choice);
+  };
+
+  if (isFinished) {
     return (
         <div className="flex flex-col items-center text-center">
             <h3 className="font-headline text-3xl text-primary-foreground mb-4">A Letter For You</h3>
             <Textarea
                 readOnly
                 className="w-full max-w-2xl h-64 bg-card/80 backdrop-blur-sm text-base font-body text-foreground p-6 rounded-lg shadow-inner border-primary/50"
-                value={gameState.finalLetter}
+                value={finalLetter}
             />
         </div>
     )
   }
 
-  if (!gameState) {
+  if (!currentStage) {
     return (
       <div className="text-center">
         <h3 className="font-headline text-3xl text-primary-foreground mb-4">A little something...</h3>
@@ -96,7 +122,7 @@ export function LoveLetterGame() {
         )}
       </CardContent>
       <CardFooter className="flex flex-col gap-2 p-4 border-t border-primary/30">
-        {!isLoading && !isFinished && gameState.options.map((option, index) => (
+        {!isLoading && !isFinished && currentStage && gameData[currentStage].options.map((option, index) => (
           <Button key={index} onClick={() => handleOptionClick(option)} className="w-full" variant="outline">
             {option}
           </Button>
