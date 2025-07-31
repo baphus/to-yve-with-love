@@ -49,7 +49,7 @@ export function HeroSection() {
           </a>
         </div>
       </div>
-       <div className="absolute bottom-10 animate-bounce z-10">
+       <div className="absolute bottom-4 animate-bounce z-10">
          <a href="#love-letters" aria-label="Scroll down">
             <ArrowDown className="h-8 w-8 text-primary" />
          </a>
