@@ -1,11 +1,10 @@
-
 'use client';
 
 import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Loader2 } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardActions } from '@/components/ui/card';
+import { Loader2, X } from 'lucide-react';
 
 const gameData = {
     start: {
@@ -31,29 +30,48 @@ const gameData = {
         reply: "Here...",
         options: ["Open the letter"],
         finalLetter: `I made this whole website for you to show how much I truly love you. I will always be there for you, and I hope this little world gives you comfort and makes you feel as appreciated and loved as you deserve.\n\nWith all my love.`,
-        nextStage: 'end',
+        nextStage: 'letter',
+    },
+    askDate: {
+        image: '/me-happy.png',
+        reply: "So... since you know how much you mean to me, would you go on a date with me to SM City? We can go for a 'laag' and have dinner in Cebu.",
+        options: ["YES!!"],
+        nextStage: 'end'
     }
 };
 
-type GameStage = keyof typeof gameData;
+type GameStage = keyof typeof gameData | 'letter' | 'end';
 
 export function LoveLetterGame() {
   const [currentStage, setCurrentStage] = useState<GameStage | null>(null);
   const [currentText, setCurrentText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isFinished, setIsFinished] = useState(false);
+  const [showLetter, setShowLetter] = useState(false);
   const [finalLetter, setFinalLetter] = useState('');
   const [currentImage, setCurrentImage] = useState('/me-neutral.png');
 
   const handleNextStage = (stage: GameStage) => {
-    const stageData = gameData[stage];
+    if (stage === 'letter') {
+        setShowLetter(true);
+        setIsLoading(false);
+        return;
+    }
+    
+    if (stage === 'end') {
+        setIsLoading(false);
+        // Handle game end state if needed
+        return;
+    }
+
+    const stageKey = stage as keyof typeof gameData;
+    const stageData = gameData[stageKey];
     
     setTimeout(() => {
         setCurrentText(stageData.reply);
-        setCurrentStage(stage);
+        setCurrentStage(stageKey);
         setCurrentImage(stageData.image);
         
-        if (stage === 'final') {
+        if ('finalLetter' in stageData) {
             setFinalLetter(stageData.finalLetter);
         }
         setIsLoading(false);
@@ -66,19 +84,21 @@ export function LoveLetterGame() {
   };
 
   const handleOptionClick = () => {
-    if (!currentStage) return;
+    if (!currentStage || currentStage === 'letter' || currentStage === 'end') return;
     
-    if (currentStage === 'final') {
-        setIsFinished(true);
-        return;
+    const stageKey = currentStage as keyof typeof gameData;
+    const nextStageKey = gameData[stageKey].nextStage as GameStage;
+    
+    if (nextStageKey) {
+        setIsLoading(true);
+        handleNextStage(nextStageKey);
     }
-
-    if (gameData[currentStage].nextStage === 'end') return;
-    
-    setIsLoading(true);
-    const nextStageKey = gameData[currentStage].nextStage as GameStage;
-    handleNextStage(nextStageKey);
   };
+
+  const closeLetter = () => {
+    setShowLetter(false);
+    handleNextStage('askDate');
+  }
 
 
   if (!currentStage) {
@@ -99,11 +119,14 @@ export function LoveLetterGame() {
         className="relative w-full max-w-4xl mx-auto h-[600px] bg-card/50 backdrop-blur-sm border-2 border-primary/30 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-end bg-cover bg-center"
         style={{ backgroundImage: "url('/vn-background.png')" }}
     >
-        {isFinished && (
+        {showLetter && (
             <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/50 backdrop-blur-md p-4">
-                <Card className="w-full max-w-2xl animate-in fade-in zoom-in-95">
+                <Card className="w-full max-w-2xl animate-in fade-in zoom-in-95 relative">
                     <CardHeader>
                         <h3 className="font-headline text-3xl text-primary-foreground text-center">A Letter For You</h3>
+                         <Button variant="ghost" size="icon" className="absolute top-2 right-2" onClick={closeLetter}>
+                            <X className="h-5 w-5" />
+                        </Button>
                     </CardHeader>
                     <CardContent>
                         <p className="whitespace-pre-wrap font-body text-base text-foreground leading-relaxed">
@@ -115,8 +138,8 @@ export function LoveLetterGame() {
         )}
 
         {/* Character Sprite */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center">
-            <div className="relative w-[550px] h-[750px]">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center pointer-events-none">
+            <div className="relative w-[700px] h-[900px]">
                 <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
             </div>
         </div>
@@ -127,9 +150,9 @@ export function LoveLetterGame() {
                 {isLoading ? <Loader2 className="h-5 w-5 text-muted-foreground animate-spin" /> : currentText}
             </p>
             
-            {!isLoading && currentStage && gameData[currentStage].options.length > 0 && (
+            {!isLoading && currentStage && currentStage !== 'letter' && currentStage !== 'end' && gameData[currentStage as keyof typeof gameData].options.length > 0 && (
                  <div className="grid grid-cols-2 gap-2">
-                    {gameData[currentStage].options.map((option, index) => (
+                    {gameData[currentStage as keyof typeof gameData].options.map((option, index) => (
                         <Button key={index} onClick={handleOptionClick} className="w-full" variant="outline">
                             {option}
                         </Button>
