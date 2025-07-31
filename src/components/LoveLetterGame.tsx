@@ -36,20 +36,16 @@ type GameStage = keyof typeof gameData;
 
 export function LoveLetterGame() {
   const [currentStage, setCurrentStage] = useState<GameStage | null>(null);
-  const [messages, setMessages] = useState<{ sender: 'ai' | 'user'; text: string }[]>([]);
+  const [currentText, setCurrentText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [finalLetter, setFinalLetter] = useState('');
 
-  const handleNextStage = (stage: GameStage, userChoice?: string) => {
-    if (userChoice) {
-        setMessages((prev) => [...prev, { sender: 'user', text: userChoice }]);
-    }
-
+  const handleNextStage = (stage: GameStage) => {
     const stageData = gameData[stage];
     
     setTimeout(() => {
-        setMessages((prev) => [...prev, { sender: 'ai', text: stageData.reply }]);
+        setCurrentText(stageData.reply);
         setCurrentStage(stage);
         
         if (stage === 'final') {
@@ -65,12 +61,11 @@ export function LoveLetterGame() {
     handleNextStage('start');
   };
 
-  const handleOptionClick = (choice: string) => {
+  const handleOptionClick = () => {
     if (!currentStage) return;
-
     setIsLoading(true);
     const nextStageKey = gameData[currentStage].nextStage as GameStage;
-    handleNextStage(nextStageKey, choice);
+    handleNextStage(nextStageKey);
   };
 
   if (isFinished) {
@@ -100,34 +95,31 @@ export function LoveLetterGame() {
   }
 
   return (
-    <Card className="w-full max-w-2xl mx-auto bg-card/80 backdrop-blur-sm border-primary/30 shadow-2xl">
-      <CardHeader className="flex flex-col items-center text-center">
-        <div className="relative h-32 w-32 rounded-full overflow-hidden border-4 border-white/80 shadow-lg mb-4">
-            {/* You can replace this placeholder with your own image at public/me.png */}
-            <Image src="/me.png" alt="A picture of me" layout="fill" objectFit="cover" data-ai-hint="portrait person" />
+    <div className="relative w-full max-w-4xl mx-auto h-[500px] bg-card/50 backdrop-blur-sm border-2 border-primary/30 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-end">
+        {/* Character Sprite */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center">
+            <div className="relative w-[300px] h-[450px]">
+                {/* You can replace this placeholder with your own image at public/me.png */}
+                <Image src="/me.png" alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
+            </div>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-4 px-6 h-64 overflow-y-auto">
-        {messages.map((message, index) => (
-          <div key={index} className={`flex items-end gap-2 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`rounded-lg px-4 py-2 max-w-[80%] text-base ${message.sender === 'user' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>
-              <p className="font-body">{message.text}</p>
-            </div>
-          </div>
-        ))}
-        {isLoading && (
-            <div className="flex justify-start">
-                <Loader2 className="h-5 w-5 text-muted-foreground animate-spin" />
-            </div>
-        )}
-      </CardContent>
-      <CardFooter className="flex flex-col gap-2 p-4 border-t border-primary/30">
-        {!isLoading && !isFinished && currentStage && gameData[currentStage].options.map((option, index) => (
-          <Button key={index} onClick={() => handleOptionClick(option)} className="w-full" variant="outline">
-            {option}
-          </Button>
-        ))}
-      </CardFooter>
-    </Card>
+
+        {/* Dialog Box */}
+        <div className="relative m-4 bg-background/80 backdrop-blur-md border border-primary/50 rounded-lg p-4 z-10">
+            <p className="font-body text-lg text-foreground mb-4 h-12">
+                {isLoading ? <Loader2 className="h-5 w-5 text-muted-foreground animate-spin" /> : currentText}
+            </p>
+            
+            {!isLoading && !isFinished && currentStage && (
+                 <div className="grid grid-cols-2 gap-2">
+                    {gameData[currentStage].options.map((option, index) => (
+                        <Button key={index} onClick={handleOptionClick} className="w-full" variant="outline">
+                            {option}
+                        </Button>
+                    ))}
+                </div>
+            )}
+        </div>
+    </div>
   );
 }
