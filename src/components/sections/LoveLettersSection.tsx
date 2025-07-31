@@ -109,7 +109,7 @@ export function LoveLettersSection() {
 
   return (
     <section id="love-letters" className="relative w-full py-20 lg:py-32 bg-primary/20 overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
             <Image src="/stickers/sticker1.png" alt="sticker" width={56} height={56} className="sticker top-[5%] left-[10%]" style={{ animationDelay: '0.1s' }} />
             <Image src="/stickers/sticker3.png" alt="sticker" width={72} height={72} className="sticker top-[15%] right-[8%]" style={{ animationDelay: '0.3s' }} />
             <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker bottom-[15%] left-[12%]" style={{ animationDelay: '0.5s' }} />
