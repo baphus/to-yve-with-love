@@ -3,39 +3,39 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 const moments = [
   {
-    image: "/moments/beach.png",
+    image: "/moments/beach.JPG",
     title: "Beach Dates",
     description: "Those sunsets, the sound of the waves, and you. There's nothing better than our time by the sea.",
     hint: "beach sunset"
   },
   {
-    image: "https://placehold.co/600x400.png",
+    image: "/moments/fnaf.JPG",
     title: "Watching FNAF at the Cinema",
-    description: "Getting scared together was surprisingly romantic. I loved seeing you jump! Best movie date ever.",
+    description: "Watching FNAF together was really fun. Just two nerds enjoying furry animatronics killing people! Best movie date ever.",
     hint: "cinema movie"
   },
   {
-    image: "https://placehold.co/600x400.png",
+    image: "/moments/eatt.JPG",
     title: "Eating Out Together",
     description: "Whether it's a fancy restaurant or just street food, sharing a meal with you is always my favorite.",
     hint: "outdoor dining"
   },
   {
-    image: "https://placehold.co/600x400.png",
+    image: "/moments/music.JPG",
     title: "Jamming to Music",
     description: "Whether we're playing our instruments or singing our hearts out at karaoke, making music with you is pure joy.",
     hint: "jamming music"
   },
   {
-    image: "https://placehold.co/600x400.png",
+    image: "/moments/together.jpg",
     title: "Mall Dates & Spending Time",
     description: "Just walking around, talking, and being with you. It doesn't matter what we do, as long as I'm with you.",
     hint: "shopping mall"
   },
   {
-    image: "https://placehold.co/600x400.png",
+    image: "/moments/art.jpg",
     title: "Art Gallery Date",
-    description: "Exploring the art gallery with you was so inspiring. Seeing the world through your eyes makes everything more beautiful.",
+    description: "Exploring the art gallery with you was so fun. But I know that the only art that's worth looking at is you.",
     hint: "art gallery"
   }
 ];

@@ -1,7 +1,11 @@
-import { Music, Flower, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 
-export function SongSection() {
+export function SongSection({ unlocked }: { unlocked: boolean }) {
+  const spotifySrc = unlocked 
+    ? "https://open.spotify.com/embed/track/5TpPSTItCwtZ8Sltr3vdzm?utm_source=generator&autoplay=1"
+    : "https://open.spotify.com/embed/track/5TpPSTItCwtZ8Sltr3vdzm?utm_source=generator";
+  
   return (
     <section id="song" className="relative w-full py-20 lg:py-32 bg-primary/20 overflow-hidden">
        <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker top-[15%] left-[8%]" style={{ animationDelay: '0.2s' }} />
@@ -15,8 +19,9 @@ export function SongSection() {
         <div className="flex justify-center">
           <div className="w-full max-w-lg rounded-xl overflow-hidden shadow-2xl border-4 border-white/50">
             <iframe
+              id="spotify-embed"
               style={{ borderRadius: '8px' }}
-              src="https://open.spotify.com/embed/track/5TpPSTItCwtZ8Sltr3vdzm?utm_source=generator"
+              src={spotifySrc}
               width="100%"
               height="352"
               frameBorder="0"

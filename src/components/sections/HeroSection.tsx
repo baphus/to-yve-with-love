@@ -7,7 +7,7 @@ export function HeroSection() {
     <section id="hero" className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-background to-primary/20">
       <div className="absolute inset-0 z-0 opacity-10">
         <Image
-          src="/hero/background.jp  g"
+          src="/hero/background.jpg"
           alt="Romantic background"
           fill
           priority

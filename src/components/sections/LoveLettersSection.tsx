@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Heart, MessageSquare, Smile, Star, Sun, BrainCircuit } from 'lucide-react';
+import { Heart, MessageSquare, Smile, Star, Sun, BrainCircuit, Trophy } from 'lucide-react';
 import Image from 'next/image';
 
 const letters = [
@@ -22,6 +22,12 @@ const letters = [
     content:
       "Watching you chase your dreams is one of my favorite things. You're so driven, passionate, and intelligent. You inspire me every single day to be a better person. I have no doubt you'll achieve everything you set your mind to.",
   },
+  {
+    icon: <Trophy className="h-6 w-6 text-amber-500" />,
+    title: 'Your Amazing Work Ethic',
+    content:
+        "You are one of the most hardworking people I know. The dedication and passion you pour into everything you do is truly inspiring. I'm so proud of your achievements and the person you are.",
+    },
     {
     icon: <BrainCircuit className="h-6 w-6 text-teal-500" />,
     title: 'Your Creative Mind',
