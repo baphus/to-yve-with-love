@@ -18,7 +18,7 @@ export function HeroSection() {
       
       <div className="container z-10 flex flex-col items-center text-center px-4">
         
-        <div className="relative w-64 h-64 md:w-80 md:h-80 mb-8 rounded-full overflow-hidden shadow-2xl border-4 border-white/80">
+        <div className="relative w-full max-w-3xl aspect-[16/9] mb-8 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/80">
           <Image 
             src="/hero/yve.png" 
             alt="A picture of Yve" 
