@@ -11,7 +11,12 @@ import { EntryPuzzle } from '@/components/EntryPuzzle';
 
 export default function Home() {
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleUnlock = () => {
     setIsUnlocked(true);
@@ -31,7 +36,9 @@ export default function Home() {
     <div className="flex min-h-screen w-full flex-col bg-background">
       {!isUnlocked && <EntryPuzzle onUnlock={handleUnlock} />}
       
-      <audio ref={audioRef} src="/oursong.mp3" preload="auto" />
+      {isClient && (
+        <audio ref={audioRef} src="/oursong.mp3" preload="auto" />
+      )}
 
       <div className={`transition-opacity duration-1000 ${isUnlocked ? 'opacity-100' : 'opacity-0'}`}>
         {/* Sticker images that will float around */}
