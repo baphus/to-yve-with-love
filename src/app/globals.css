@@ -98,5 +98,5 @@ body {
 
 .sticker {
   @apply absolute drop-shadow-lg;
-  animation: stop-motion-tilt 2s ease-in-out infinite alternate;
+  animation: stop-motion-tilt 2s steps(2, jump-none) infinite alternate;
 }
