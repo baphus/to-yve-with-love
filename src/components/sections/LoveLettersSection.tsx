@@ -74,8 +74,7 @@ function LoveLetter({
         {/* Envelope Front */}
         <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-secondary shadow-lg flex items-center justify-center p-4 border-2 border-primary/50 overflow-hidden z-10">
             <div className={`font-headline text-xl text-primary-foreground text-center px-4 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}>
-                <p>{letter.title}</p>
-                <p className="text-sm font-body mt-2 opacity-80">(Click to open)</p>
+                <p className="text-sm font-body mt-2 opacity-80">(Tap to open)</p>
             </div>
         </div>
 
