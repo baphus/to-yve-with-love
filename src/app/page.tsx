@@ -51,6 +51,9 @@ export default function Home() {
         <Image src="/stickers/sticker7.png" alt="sticker" width={60} height={60} className="sticker top-[90%] left-[12%] z-20" style={{ animationDelay: '1.2s' }} />
         <Image src="/stickers/sticker4.png" alt="sticker" width={48} height={48} className="sticker top-[45%] right-[5%] z-20" style={{ animationDelay: '1.4s' }} />
         <Image src="/stickers/sticker1.png" alt="sticker" width={52} height={52} className="sticker top-[75%] right-[15%] z-20" style={{ animationDelay: '1.6s' }} />
+        <Image src="/stickers/sticker2.png" alt="sticker" width={58} height={58} className="sticker top-[25%] left-[20%] rotate-12 z-20" style={{ animationDelay: '1.8s' }} />
+        <Image src="/stickers/sticker7.png" alt="sticker" width={66} height={66} className="sticker top-[55%] right-[20%] -rotate-12 z-20" style={{ animationDelay: '2.0s' }} />
+        <Image src="/stickers/sticker3.png" alt="sticker" width={50} height={50} className="sticker top-[95%] left-[30%] rotate-6 z-20" style={{ animationDelay: '2.2s' }} />
 
         <main className="flex-1">
           <HeroSection />
