@@ -6,8 +6,8 @@ export function SongSection() {
   
   return (
     <section id="song" className="relative w-full py-20 lg:py-32 bg-primary/20 overflow-hidden">
-       <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker top-[15%] left-[8%]" style={{ animationDelay: '0.2s' }} />
-       <Image src="/stickers/sticker4.png" alt="sticker" width={72} height={72} className="sticker bottom-[20%] right-[10%]" style={{ animationDelay: '0.4s' }} />
+       <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker top-[15%] left-[8%] z-20" style={{ animationDelay: '0.2s' }} />
+       <Image src="/stickers/sticker4.png" alt="sticker" width={72} height={72} className="sticker bottom-[20%] right-[10%] z-20" style={{ animationDelay: '0.4s' }} />
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
