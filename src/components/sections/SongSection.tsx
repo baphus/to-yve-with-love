@@ -16,14 +16,14 @@ export function SongSection() {
           <div className="w-full max-w-lg rounded-xl overflow-hidden shadow-2xl border-4 border-white/50">
             <iframe
               style={{ borderRadius: '8px' }}
-              src="https://open.spotify.com/embed/track/1BxfuY_SslJ5eQ6nw5kndh?utm_source=generator"
+              src="https://open.spotify.com/embed/track/5TpPSTItCwtZ8Sltr3vdzm?utm_source=generator"
               width="100%"
               height="352"
               frameBorder="0"
               allowFullScreen={false}
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-              title="Spotify Embed for 'Perfect' by Ed Sheeran"
+              title="Spotify Embed for 'Last Night on Earth' by Green Day"
             ></iframe>
           </div>
         </div>

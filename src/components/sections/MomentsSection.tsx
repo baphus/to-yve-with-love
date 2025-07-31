@@ -5,33 +5,39 @@ import { Flower2, Sparkles } from 'lucide-react';
 const moments = [
   {
     image: "/moments/beach.png",
-    title: "Our First Beach Trip",
-    description: "Remember how we watched the sunset and you almost got swept away by a wave? Best day ever."
+    title: "Beach Dates",
+    description: "Those sunsets, the sound of the waves, and you. There's nothing better than our time by the sea.",
+    hint: "beach sunset"
   },
   {
-    image: "/moments/city.png",
-    title: "That Night in the City",
-    description: "The city lights had nothing on the sparkle in your eyes. I'll never forget that dinner."
+    image: "https://placehold.co/600x400.png",
+    title: "Watching FNAF at the Cinema",
+    description: "Getting scared together was surprisingly romantic. I loved seeing you jump! Best movie date ever.",
+    hint: "cinema movie"
   },
   {
-    image: "/moments/furniture.png",
-    title: "Building IKEA Furniture",
-    description: "A true test of any relationship. We passed with flying colors (and only a few leftover screws)."
+    image: "https://placehold.co/600x400.png",
+    title: "Eating Out Together",
+    description: "Whether it's a fancy restaurant or just street food, sharing a meal with you is always my favorite.",
+    hint: "outdoor dining"
   },
   {
-    image: "/moments/hike.png",
-    title: "Conquering That Hike",
-    description: "You complained for the first hour, but the view from the top (and seeing you proud) was worth it."
+    image: "https://placehold.co/600x400.png",
+    title: "Jamming to Music With You",
+    description: "Our car concerts are legendary. Singing our hearts out with you is pure joy, even if we're off-key.",
+    hint: "music car"
   },
   {
-    image: "/moments/lazy.png",
-    title: "Every Lazy Sunday",
-    description: "My favorite moments are often the quiet ones, just being with you, doing nothing at all."
+    image: "https://placehold.co/600x400.png",
+    title: "Mall Dates & Spending Time",
+    description: "Just walking around, talking, and being with you. It doesn't matter what we do, as long as I'm with you.",
+    hint: "shopping mall"
   },
   {
     image: "/moments/kitchen.png",
-    title: "The Great Kitchen Disaster",
-    description: "We tried to make pasta from scratch. We ended up ordering pizza. 10/10 would do it again."
+    title: "Our Quiet Moments",
+    description: "Sometimes the best moments are the quiet ones, just enjoying each other's company at home.",
+    hint: "couple relaxing"
   }
 ];
 
@@ -56,6 +62,7 @@ export function MomentsSection() {
                     alt={moment.title}
                     fill
                     className="object-cover"
+                    data-ai-hint={moment.hint}
                   />
                 </div>
               </CardContent>
