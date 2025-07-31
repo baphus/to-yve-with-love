@@ -4,9 +4,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
-import { Textarea } from './ui/textarea';
 
 const gameData = {
     start: {
@@ -30,7 +29,7 @@ const gameData = {
     final: {
         image: '/me-happy.png',
         reply: "Here...",
-        options: [],
+        options: ["Open the letter"],
         finalLetter: `I made this whole website for you to show how much I truly love you. I will always be there for you, and I hope this little world gives you comfort and makes you feel as appreciated and loved as you deserve.\n\nWith all my love.`,
         nextStage: 'end',
     }
@@ -55,9 +54,7 @@ export function LoveLetterGame() {
         setCurrentImage(stageData.image);
         
         if (stage === 'final') {
-            // Don't set isFinished here yet, show the final dialog first
             setFinalLetter(stageData.finalLetter);
-             setTimeout(() => setIsFinished(true), 1000); // Wait a bit before showing the final letter card
         }
         setIsLoading(false);
     }, 500);
@@ -69,7 +66,15 @@ export function LoveLetterGame() {
   };
 
   const handleOptionClick = () => {
-    if (!currentStage || gameData[currentStage].nextStage === 'end') return;
+    if (!currentStage) return;
+    
+    if (currentStage === 'final') {
+        setIsFinished(true);
+        return;
+    }
+
+    if (gameData[currentStage].nextStage === 'end') return;
+    
     setIsLoading(true);
     const nextStageKey = gameData[currentStage].nextStage as GameStage;
     handleNextStage(nextStageKey);
@@ -111,7 +116,7 @@ export function LoveLetterGame() {
 
         {/* Character Sprite */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center">
-            <div className="relative w-[450px] h-[600px]">
+            <div className="relative w-[550px] h-[750px]">
                 <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
             </div>
         </div>
