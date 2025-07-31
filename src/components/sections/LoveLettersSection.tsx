@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Heart, MessageSquare, Smile, Star, Sun, BrainCircuit, Mail } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Heart, MessageSquare, Smile, Star, Sun, BrainCircuit } from 'lucide-react';
 
 const letters = [
   {
@@ -52,30 +51,33 @@ function LoveLetter({
   onClick: () => void;
 }) {
   return (
-    <div className="w-full h-48 mb-4 [perspective:1000px]">
+    <div className="w-full h-48 mb-4">
       <div
-        className="relative w-full h-full cursor-pointer transition-transform duration-700 transform-style-3d"
+        className="relative w-full h-full cursor-pointer group"
         onClick={onClick}
-        style={{ transform: isOpen ? 'rotateX(180deg)' : 'none' }}
       >
-        {/* Front of the card (closed envelope) */}
-        <div className="absolute w-full h-full backface-hidden">
-          <div className="h-full rounded-lg bg-secondary shadow-lg flex items-center justify-center p-4 border-2 border-primary/50 relative overflow-hidden">
-             <div className="absolute top-0 left-0 w-full h-1/2 bg-accent/30" style={{clipPath: 'polygon(0 0, 100% 0, 50% 100%)'}}></div>
-             <Mail className="h-16 w-16 text-primary-foreground/50"/>
-             <p className="absolute bottom-4 font-headline text-xl text-primary-foreground">{letter.title}</p>
+        {/* Letter Content */}
+        <div className={`absolute top-0 left-0 w-full h-full transition-all duration-700 ease-in-out ${isOpen ? 'bottom-24' : 'bottom-0'}`}>
+          <div className="bg-card/90 backdrop-blur-sm rounded-lg shadow-2xl border-2 border-accent/40 p-6 h-full flex flex-col justify-center">
+              <div className="flex items-center gap-4 mb-4">
+                {letter.icon}
+                <h3 className="font-headline text-xl text-primary-foreground">{letter.title}</h3>
+              </div>
+              <p className="font-body text-base text-foreground/90">{letter.content}</p>
           </div>
         </div>
 
-        {/* Back of the card (opened letter) */}
-        <div className="absolute w-full h-full [transform:rotateX(180deg)] backface-hidden">
-          <div className="bg-card/80 backdrop-blur-sm rounded-lg shadow-2xl border-2 border-accent/40 p-6 h-full flex flex-col justify-center">
-            <div className="flex items-center gap-4 mb-4">
-              {letter.icon}
-              <h3 className="font-headline text-xl text-primary-foreground">{letter.title}</h3>
+        {/* Envelope */}
+        <div className="absolute top-0 left-0 w-full h-full">
+            {/* Envelope Flap */}
+            <div className={`absolute top-0 left-0 w-full h-1/2 bg-accent/80 transition-transform duration-500 ease-in-out origin-bottom ${isOpen ? '[transform:rotateX(180deg)]' : ''}`} style={{clipPath: 'polygon(0 0, 100% 0, 50% 100%)'}}></div>
+            {/* Envelope Body */}
+            <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-secondary shadow-lg flex items-center justify-center p-4 border-2 border-primary/50 overflow-hidden">
+                <div className="font-headline text-xl text-primary-foreground text-center px-4">
+                    <p>{letter.title}</p>
+                    <p className="text-sm font-body mt-2 opacity-80">(Click to open)</p>
+                </div>
             </div>
-            <p className="font-body text-base text-foreground/90">{letter.content}</p>
-          </div>
         </div>
       </div>
     </div>
@@ -113,7 +115,3 @@ export function LoveLettersSection() {
     </section>
   );
 }
-
-// Add these to globals.css or a style tag if needed for tailwind JIT
-// .transform-style-3d { transform-style: preserve-3d; }
-// .backface-hidden { backface-visibility: hidden; }
