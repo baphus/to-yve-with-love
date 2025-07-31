@@ -11,13 +11,13 @@ import { Textarea } from './ui/textarea';
 const gameData = {
     start: {
         image: '/me-neutral.png',
-        reply: "Hey... um, can I talk to you for a second?",
-        options: ["Of course! What's up?", "Is everything okay?"],
+        reply: "Hi bb..., can I talk to you for a second?",
+        options: ["Of course! What's up?", "Okay ra ka?"],
         nextStage: 'reassure',
     },
     reassure: {
         image: '/me-shy.png',
-        reply: "Everything's great! I just... well, I have something for you.",
+        reply: "I just... well, I have something for you.",
         options: ["Oh? For me?", "What is it?"],
         nextStage: 'reveal',
     },
@@ -55,8 +55,9 @@ export function LoveLetterGame() {
         setCurrentImage(stageData.image);
         
         if (stage === 'final') {
+            // Don't set isFinished here yet, show the final dialog first
             setFinalLetter(stageData.finalLetter);
-            setIsFinished(true);
+             setTimeout(() => setIsFinished(true), 1000); // Wait a bit before showing the final letter card
         }
         setIsLoading(false);
     }, 500);
@@ -68,24 +69,12 @@ export function LoveLetterGame() {
   };
 
   const handleOptionClick = () => {
-    if (!currentStage) return;
+    if (!currentStage || gameData[currentStage].nextStage === 'end') return;
     setIsLoading(true);
     const nextStageKey = gameData[currentStage].nextStage as GameStage;
     handleNextStage(nextStageKey);
   };
 
-  if (isFinished) {
-    return (
-        <div className="flex flex-col items-center text-center">
-            <h3 className="font-headline text-3xl text-primary-foreground mb-4">A Letter For You</h3>
-            <Textarea
-                readOnly
-                className="w-full max-w-2xl h-64 bg-card/80 backdrop-blur-sm text-base font-body text-foreground p-6 rounded-lg shadow-inner border-primary/50"
-                value={finalLetter}
-            />
-        </div>
-    )
-  }
 
   if (!currentStage) {
     return (
@@ -102,13 +91,27 @@ export function LoveLetterGame() {
 
   return (
     <div 
-        className="relative w-full max-w-4xl mx-auto h-[500px] bg-card/50 backdrop-blur-sm border-2 border-primary/30 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-end bg-cover bg-center"
+        className="relative w-full max-w-4xl mx-auto h-[600px] bg-card/50 backdrop-blur-sm border-2 border-primary/30 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-end bg-cover bg-center"
         style={{ backgroundImage: "url('/vn-background.png')" }}
     >
+        {isFinished && (
+            <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/50 backdrop-blur-md p-4">
+                <Card className="w-full max-w-2xl animate-in fade-in zoom-in-95">
+                    <CardHeader>
+                        <h3 className="font-headline text-3xl text-primary-foreground text-center">A Letter For You</h3>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="whitespace-pre-wrap font-body text-base text-foreground leading-relaxed">
+                            {finalLetter}
+                        </p>
+                    </CardContent>
+                </Card>
+            </div>
+        )}
+
         {/* Character Sprite */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center">
-            <div className="relative w-[300px] h-[450px]">
-                {/* You can replace this placeholder with your own image at public/me.png */}
+            <div className="relative w-[450px] h-[600px]">
                 <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
             </div>
         </div>
@@ -119,7 +122,7 @@ export function LoveLetterGame() {
                 {isLoading ? <Loader2 className="h-5 w-5 text-muted-foreground animate-spin" /> : currentText}
             </p>
             
-            {!isLoading && !isFinished && currentStage && (
+            {!isLoading && currentStage && gameData[currentStage].options.length > 0 && (
                  <div className="grid grid-cols-2 gap-2">
                     {gameData[currentStage].options.map((option, index) => (
                         <Button key={index} onClick={handleOptionClick} className="w-full" variant="outline">
