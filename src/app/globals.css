@@ -96,6 +96,21 @@ body {
   }
 }
 
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-fall {
+  animation: fall linear forwards;
+}
+
 .sticker {
   @apply absolute drop-shadow-lg;
   animation: stop-motion-tilt 2s steps(2, jump-none) infinite alternate;

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Loader2, X } from 'lucide-react';
+import { Loader2, X, Heart } from 'lucide-react';
 
 const gameData = {
     start: {
@@ -22,7 +22,7 @@ const gameData = {
     reveal: {
         image: '/me-blushing.png',
         reply: "I'm not the best with words sometimes, so I wrote this down. It's... it's for you.",
-        options: ["A letter? For me?", "You wrote me a letter?"],
+        options: ["Open the letter"],
         nextStage: 'final',
     },
     final: {
@@ -42,11 +42,33 @@ const gameData = {
 
 type GameStage = keyof typeof gameData | 'letter' | 'end';
 
+function HeartsOverlay() {
+    return (
+        <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden">
+            {[...Array(20)].map((_, i) => (
+                <Heart
+                    key={i}
+                    className="absolute text-accent fill-accent animate-fall"
+                    style={{
+                        left: `${Math.random() * 100}%`,
+                        animationDuration: `${Math.random() * 3 + 4}s`,
+                        animationDelay: `${Math.random() * 5}s`,
+                        width: `${Math.floor(Math.random() * 20) + 10}px`,
+                        height: `${Math.floor(Math.random() * 20) + 10}px`,
+                    }}
+                />
+            ))}
+        </div>
+    );
+}
+
+
 export function LoveLetterGame() {
   const [currentStage, setCurrentStage] = useState<GameStage | null>(null);
   const [currentText, setCurrentText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showLetter, setShowLetter] = useState(false);
+  const [showHearts, setShowHearts] = useState(false);
   const [finalLetter, setFinalLetter] = useState('');
   const [currentImage, setCurrentImage] = useState('/me-neutral.png');
 
@@ -59,6 +81,8 @@ export function LoveLetterGame() {
     
     if (stage === 'end') {
         setIsLoading(false);
+        setShowHearts(true);
+        setCurrentText("Yay! I'm so excited! Let's make it a day to remember. ❤️");
         // Handle game end state if needed
         return;
     }
@@ -119,6 +143,7 @@ export function LoveLetterGame() {
         className="relative w-full max-w-4xl mx-auto h-[600px] bg-card/50 backdrop-blur-sm border-2 border-primary/30 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-end bg-cover bg-center"
         style={{ backgroundImage: "url('/vn-background.png')" }}
     >
+        {showHearts && <HeartsOverlay />}
         {showLetter && (
             <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/50 backdrop-blur-md p-4">
                 <Card className="w-full max-w-2xl animate-in fade-in zoom-in-95 relative">
@@ -138,7 +163,7 @@ export function LoveLetterGame() {
         )}
 
         {/* Character Sprite */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center pointer-events-none">
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center pointer-events-none">
             <div className="relative w-[450px] h-[650px]">
                 <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
             </div>
@@ -157,7 +182,7 @@ export function LoveLetterGame() {
                 {isLoading ? <Loader2 className="h-5 w-5 text-muted-foreground animate-spin" /> : currentText}
             </p>
             
-            {!isLoading && currentStage && currentStage !== 'letter' && currentStage !== 'end' && gameData[currentStage as keyof typeof gameData].options.length > 0 && (
+            {!isLoading && currentStage && currentStage !== 'letter' && !showHearts && gameData[currentStage as keyof typeof gameData].options.length > 0 && (
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {gameData[currentStage as keyof typeof gameData].options.map((option, index) => (
                         <Button key={index} onClick={handleOptionClick} className="w-full" variant="outline">
