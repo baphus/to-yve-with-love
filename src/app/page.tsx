@@ -16,29 +16,29 @@ export default function Home() {
 
   useEffect(() => {
     setIsClient(true);
+    // Pre-create the audio element
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+      audioRef.current.preload = 'auto';
+    }
   }, []);
 
   const handleUnlock = () => {
     setIsUnlocked(true);
-  };
-  
-  useEffect(() => {
-    if (isUnlocked && audioRef.current) {
+    if (audioRef.current) {
+      // Set the source and play on unlock
+      audioRef.current.src = '/oursong.mp3';
       audioRef.current.play().catch(error => {
-        // Autoplay was prevented.
         console.error("Audio autoplay failed:", error);
       });
     }
-  }, [isUnlocked]);
-
+  };
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       {!isUnlocked && <EntryPuzzle onUnlock={handleUnlock} />}
       
-      {isClient && (
-        <audio ref={audioRef} src="/oursong.mp3" preload="auto" />
-      )}
+      {/* The audio element is now managed via the ref and not rendered directly here */}
 
       <div className={`transition-opacity duration-1000 ${isUnlocked ? 'opacity-100' : 'opacity-0'}`}>
         {/* Sticker images that will float around */}
