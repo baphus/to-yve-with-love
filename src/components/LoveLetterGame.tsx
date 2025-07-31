@@ -10,21 +10,25 @@ import { Textarea } from './ui/textarea';
 
 const gameData = {
     start: {
+        image: '/me-neutral.png',
         reply: "Hey... um, can I talk to you for a second?",
         options: ["Of course! What's up?", "Is everything okay?"],
         nextStage: 'reassure',
     },
     reassure: {
+        image: '/me-shy.png',
         reply: "Everything's great! I just... well, I have something for you.",
         options: ["Oh? For me?", "What is it?"],
         nextStage: 'reveal',
     },
     reveal: {
+        image: '/me-blushing.png',
         reply: "I'm not the best with words sometimes, so I wrote this down. It's... it's for you.",
         options: ["A letter? For me?", "You wrote me a letter?"],
         nextStage: 'final',
     },
     final: {
+        image: '/me-happy.png',
         reply: "Here...",
         options: [],
         finalLetter: `I made this whole website for you to show how much I truly love you. I will always be there for you, and I hope this little world gives you comfort and makes you feel as appreciated and loved as you deserve.\n\nWith all my love.`,
@@ -40,6 +44,7 @@ export function LoveLetterGame() {
   const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [finalLetter, setFinalLetter] = useState('');
+  const [currentImage, setCurrentImage] = useState('/me-neutral.png');
 
   const handleNextStage = (stage: GameStage) => {
     const stageData = gameData[stage];
@@ -47,6 +52,7 @@ export function LoveLetterGame() {
     setTimeout(() => {
         setCurrentText(stageData.reply);
         setCurrentStage(stage);
+        setCurrentImage(stageData.image);
         
         if (stage === 'final') {
             setFinalLetter(stageData.finalLetter);
@@ -95,12 +101,15 @@ export function LoveLetterGame() {
   }
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto h-[500px] bg-card/50 backdrop-blur-sm border-2 border-primary/30 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-end">
+    <div 
+        className="relative w-full max-w-4xl mx-auto h-[500px] bg-card/50 backdrop-blur-sm border-2 border-primary/30 shadow-2xl rounded-lg overflow-hidden flex flex-col justify-end bg-cover bg-center"
+        style={{ backgroundImage: "url('/vn-background.png')" }}
+    >
         {/* Character Sprite */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center">
             <div className="relative w-[300px] h-[450px]">
                 {/* You can replace this placeholder with your own image at public/me.png */}
-                <Image src="/me.png" alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
+                <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
             </div>
         </div>
 
