@@ -23,9 +23,9 @@ const moments = [
   },
   {
     image: "https://placehold.co/600x400.png",
-    title: "Jamming to Music With You",
-    description: "Our car concerts are legendary. Singing our hearts out with you is pure joy, even if we're off-key.",
-    hint: "music car"
+    title: "Karaoke Nights",
+    description: "Our karaoke duets are legendary. Singing our hearts out with you is pure joy, even if we're off-key.",
+    hint: "karaoke singing"
   },
   {
     image: "https://placehold.co/600x400.png",
@@ -44,8 +44,9 @@ const moments = [
 export function MomentsSection() {
   return (
     <section id="moments" className="w-full py-20 lg:py-32 bg-background relative overflow-hidden">
-      <Flower2 className="sticker top-24 left-8 opacity-50 -rotate-12" />
-      <Sparkles className="sticker bottom-1/4 right-8 opacity-50 rotate-12" />
+      <Image src="/stickers/sticker2.png" alt="sticker" width={64} height={64} className="sticker top-[10%] right-[5%] rotate-12" style={{ animationDelay: '0.1s' }} />
+      <Image src="/stickers/sticker6.png" alt="sticker" width={80} height={80} className="sticker bottom-[10%] left-[5%] -rotate-12" style={{ animationDelay: '0.3s' }} />
+
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">

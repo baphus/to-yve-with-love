@@ -16,7 +16,8 @@ export default function Home() {
       <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker top-[85%] right-[5%] -rotate-6" style={{ animationDelay: '0.8s' }} />
       <Image src="/stickers/sticker6.png" alt="sticker" width={88} height={88} className="sticker top-[70%] left-[25%] rotate-6" style={{ animationDelay: '1s' }} />
       <Image src="/stickers/sticker7.png" alt="sticker" width={60} height={60} className="sticker top-[90%] left-[12%]" style={{ animationDelay: '1.2s' }} />
-
+      <Image src="/stickers/sticker4.png" alt="sticker" width={48} height={48} className="sticker top-[45%] right-[5%]" style={{ animationDelay: '1.4s' }} />
+      <Image src="/stickers/sticker1.png" alt="sticker" width={52} height={52} className="sticker top-[75%] right-[15%]" style={{ animationDelay: '1.6s' }} />
 
       <main className="flex-1">
         <HeroSection />

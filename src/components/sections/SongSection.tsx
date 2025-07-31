@@ -1,16 +1,16 @@
-import { Music, Flower } from "lucide-react";
+import { Music, Flower, Heart } from "lucide-react";
+import Image from "next/image";
 
 export function SongSection() {
   return (
     <section id="song" className="relative w-full py-20 lg:py-32 bg-primary/20 overflow-hidden">
-       <Flower className="sticker top-1/2 left-12 -rotate-12" />
-       <Music className="sticker top-1/3 right-12 rotate-6" />
+       <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker top-[15%] left-[8%]" style={{ animationDelay: '0.2s' }} />
+       <Image src="/stickers/sticker4.png" alt="sticker" width={72} height={72} className="sticker bottom-[20%] right-[10%]" style={{ animationDelay: '0.4s' }} />
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="font-headline text-4xl md:text-5xl text-primary-foreground">Our Song</h2>
           <p className="mt-2 font-body text-lg text-foreground/80">Because it always makes me think of you.</p>
-          <p className="mt-2 font-body text-sm text-foreground/60">(P.S. You can get the embed code for our actual song from Spotify by clicking Share -&gt; Embed track)</p>
         </div>
         <div className="flex justify-center">
           <div className="w-full max-w-lg rounded-xl overflow-hidden shadow-2xl border-4 border-white/50">
@@ -26,6 +26,12 @@ export function SongSection() {
               title="Spotify Embed for 'Last Night on Earth' by Green Day"
             ></iframe>
           </div>
+        </div>
+        <div className="mt-16 text-center">
+          <Heart className="mx-auto h-12 w-12 text-accent/80" />
+          <p className="font-headline text-2xl text-primary-foreground max-w-3xl mx-auto">
+            Thank you for being the incredible person you are. Every day with you is a gift, and I'm endlessly grateful for your love, your laughter, and your beautiful soul.
+          </p>
         </div>
       </div>
     </section>
