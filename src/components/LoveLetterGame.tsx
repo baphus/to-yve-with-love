@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardActions } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Loader2, X } from 'lucide-react';
 
 const gameData = {
@@ -29,7 +29,7 @@ const gameData = {
         image: '/me-happy.png',
         reply: "Here...",
         options: ["Open the letter"],
-        finalLetter: `I made this whole website for you to show how much I truly love you. I will always be there for you, and I hope this little world gives you comfort and makes you feel as appreciated and loved as you deserve.\n\nWith all my love.`,
+        finalLetter: `I made this whole website for you to show how much I truly love you. I will always be there for you, and I hope this little world gives you comfort and makes you feel as appreciated and loved as you deserve.\n\nWith all my love. \n-Josephus`,
         nextStage: 'letter',
     },
     askDate: {
@@ -139,14 +139,21 @@ export function LoveLetterGame() {
 
         {/* Character Sprite */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center pointer-events-none">
-            <div className="relative w-[700px] h-[900px]">
+            <div className="relative w-[550px] h-[750px]">
                 <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
             </div>
+        </div>
+        
+        {/* Name Tag */}
+        <div className="absolute left-8 bottom-[180px] z-10">
+          <div className="bg-background/80 backdrop-blur-md border border-primary/50 rounded-md px-4 py-1">
+            <p className="font-headline text-xl text-primary-foreground">Josephus</p>
+          </div>
         </div>
 
         {/* Dialog Box */}
         <div className="relative m-4 bg-background/80 backdrop-blur-md border border-primary/50 rounded-lg p-4 z-10">
-            <p className="font-body text-lg text-foreground mb-4 h-12">
+            <p className="font-body text-lg text-foreground mb-4 h-12 pt-2">
                 {isLoading ? <Loader2 className="h-5 w-5 text-muted-foreground animate-spin" /> : currentText}
             </p>
             
