@@ -47,7 +47,8 @@ export function MomentsSection() {
       <Image src="/stickers/sticker6.png" alt="sticker" width={80} height={80} className="sticker bottom-[10%] left-[5%] -rotate-12 z-20" style={{ animationDelay: '0.3s' }} />
       <Image src="/stickers/sticker4.png" alt="sticker" width={72} height={72} className="sticker top-[35%] left-[8%] z-20" style={{ animationDelay: '0.5s' }} />
       <Image src="/stickers/sticker5.png" alt="sticker" width={72} height={72} className="sticker bottom-[25%] right-[8%] z-20" style={{ animationDelay: '0.7s' }} />
-
+      <Image src="/stickers/sticker8.png" alt="sticker" width={50} height={50} className="sticker top-[65%] right-[15%] z-20" style={{ animationDelay: '0.9s' }} />
+      <Image src="/stickers/sticker10.png" alt="sticker" width={60} height={60} className="sticker bottom-[45%] left-[10%] z-20" style={{ animationDelay: '1.1s' }} />
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">

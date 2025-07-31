@@ -5,15 +5,18 @@ import { ArrowDown } from 'lucide-react';
 export function HeroSection() {
   return (
     <section id="hero" className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-background to-primary/20">
-      <div className="absolute inset-0 z-0 opacity-10">
-        <Image
-          src="/hero/background.jpg"
-          alt="Romantic background"
-          fill
-          priority
-          className="object-cover"
-          data-ai-hint="ethereal pastel flowers"
-        />
+      {/* Stickers Container */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <Image src="/stickers/sticker1.png" alt="sticker" width={56} height={56} className="sticker top-[5%] left-[10%]" style={{ animationDelay: '0.1s' }} />
+        <Image src="/stickers/sticker3.png" alt="sticker" width={72} height={72} className="sticker top-[20%] right-[8%]" style={{ animationDelay: '0.3s' }} />
+        <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker bottom-[15%] left-[12%]" style={{ animationDelay: '0.5s' }} />
+        <Image src="/stickers/sticker7.png" alt="sticker" width={60} height={60} className="sticker bottom-[5%] right-[10%]" style={{ animationDelay: '0.7s' }} />
+        <Image src="/stickers/sticker8.png" alt="sticker" width={80} height={80} className="sticker top-[50%] right-[5%]" style={{ animationDelay: '0.9s' }} />
+        <Image src="/stickers/sticker9.png" alt="sticker" width={68} height={68} className="sticker bottom-[25%] right-[20%]" style={{ animationDelay: '1.1s' }} />
+        <Image src="/stickers/sticker10.png" alt="sticker" width={50} height={50} className="sticker top-[55%] left-[15%]" style={{ animationDelay: '1.3s' }} />
+        <Image src="/stickers/sticker2.png" alt="sticker" width={64} height={64} className="sticker top-[10%] right-[5%] rotate-12" style={{ animationDelay: '1.5s' }} />
+        <Image src="/stickers/sticker6.png" alt="sticker" width={80} height={80} className="sticker bottom-[10%] left-[5%] -rotate-12" style={{ animationDelay: '1.7s' }} />
+        <Image src="/stickers/sticker4.png" alt="sticker" width={72} height={72} className="sticker top-[35%] left-[8%]" style={{ animationDelay: '1.9s' }} />
       </div>
       
       <div className="container z-10 flex flex-col items-center text-center px-4">
