@@ -113,6 +113,9 @@ export function LoveLettersSection() {
       <Image src="/stickers/sticker3.png" alt="sticker" width={72} height={72} className="sticker top-[20%] right-[8%]" style={{ animationDelay: '0.3s' }} />
       <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker bottom-[15%] left-[12%]" style={{ animationDelay: '0.5s' }} />
       <Image src="/stickers/sticker7.png" alt="sticker" width={60} height={60} className="sticker bottom-[5%] right-[10%]" style={{ animationDelay: '0.7s' }} />
+      <Image src="/stickers/sticker2.png" alt="sticker" width={48} height={48} className="sticker top-[40%] left-[5%]" style={{ animationDelay: '0.9s' }} />
+      <Image src="/stickers/sticker4.png" alt="sticker" width={68} height={68} className="sticker bottom-[30%] right-[15%]" style={{ animationDelay: '1.1s' }} />
+      <Image src="/stickers/sticker6.png" alt="sticker" width={80} height={80} className="sticker top-[55%] left-[15%]" style={{ animationDelay: '1.3s' }} />
 
       <div className="container mx-auto max-w-3xl px-4 z-10">
         <div className="text-center mb-16">

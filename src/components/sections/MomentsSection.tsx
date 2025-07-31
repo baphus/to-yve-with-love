@@ -45,6 +45,8 @@ export function MomentsSection() {
     <section id="moments" className="w-full py-20 lg:py-32 bg-background relative overflow-hidden">
       <Image src="/stickers/sticker2.png" alt="sticker" width={64} height={64} className="sticker top-[10%] right-[5%] rotate-12" style={{ animationDelay: '0.1s' }} />
       <Image src="/stickers/sticker6.png" alt="sticker" width={80} height={80} className="sticker bottom-[10%] left-[5%] -rotate-12" style={{ animationDelay: '0.3s' }} />
+      <Image src="/stickers/sticker1.png" alt="sticker" width={56} height={56} className="sticker top-[35%] left-[8%]" style={{ animationDelay: '0.5s' }} />
+      <Image src="/stickers/sticker4.png" alt="sticker" width={72} height={72} className="sticker bottom-[25%] right-[8%]" style={{ animationDelay: '0.7s' }} />
 
 
       <div className="container mx-auto px-4">
