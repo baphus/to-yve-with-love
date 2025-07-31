@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, Sprout, Cat, Star } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 
 export function HeroSection() {
   return (
     <section id="hero" className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-background to-primary/20">
-      <div className="absolute inset-0 z-0 opacity-20">
+      <div className="absolute inset-0 z-0 opacity-10">
         <Image
-          src="https://placehold.co/1920x1080.png"
+          src="/hero/background.png"
           alt="Romantic background"
           fill
           priority
@@ -16,11 +16,18 @@ export function HeroSection() {
         />
       </div>
       
-      <Sprout className="sticker top-1/4 left-8 -rotate-12" />
-      <Cat className="sticker top-1/2 right-12 rotate-6" />
-      <Star className="sticker bottom-1/4 left-16 rotate-12" />
-      
       <div className="container z-10 flex flex-col items-center text-center px-4">
+        
+        <div className="relative w-64 h-64 md:w-80 md:h-80 mb-8 rounded-full overflow-hidden shadow-2xl border-4 border-white/80">
+          <Image 
+            src="/hero/yve.png" 
+            alt="A picture of Yve" 
+            fill
+            priority
+            className="object-cover"
+          />
+        </div>
+
         <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl text-primary-foreground drop-shadow-lg">
           To My Dearest Yve
         </h1>
