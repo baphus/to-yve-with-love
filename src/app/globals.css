@@ -86,16 +86,16 @@ body {
   }
 }
 
-@keyframes tilt-float {
+@keyframes stop-motion-tilt {
   0%, 100% {
-    transform: translateY(0px) rotate(-3deg);
+    transform: rotate(-4deg);
   }
   50% {
-    transform: translateY(-15px) rotate(3deg);
+    transform: rotate(4deg);
   }
 }
 
 .sticker {
     @apply absolute w-16 h-16 drop-shadow-lg;
-    animation: tilt-float 8s ease-in-out infinite;
+    animation: stop-motion-tilt 0.5s steps(2, jump-none) infinite;
 }
