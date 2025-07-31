@@ -139,7 +139,7 @@ export function LoveLetterGame() {
 
         {/* Character Sprite */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full flex items-end justify-center pointer-events-none">
-            <div className="relative w-[550px] h-[750px]">
+            <div className="relative w-[450px] h-[650px]">
                 <Image src={currentImage} alt="A picture of me" layout="fill" objectFit="contain" objectPosition="bottom" data-ai-hint="portrait person" />
             </div>
         </div>
@@ -153,12 +153,12 @@ export function LoveLetterGame() {
 
         {/* Dialog Box */}
         <div className="relative m-4 bg-background/80 backdrop-blur-md border border-primary/50 rounded-lg p-4 z-10">
-            <p className="font-body text-lg text-foreground mb-4 h-12 pt-2">
+            <p className="font-body text-lg text-foreground mb-4 min-h-[4rem] md:min-h-0 md:h-12 pt-2">
                 {isLoading ? <Loader2 className="h-5 w-5 text-muted-foreground animate-spin" /> : currentText}
             </p>
             
             {!isLoading && currentStage && currentStage !== 'letter' && currentStage !== 'end' && gameData[currentStage as keyof typeof gameData].options.length > 0 && (
-                 <div className="grid grid-cols-2 gap-2">
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {gameData[currentStage as keyof typeof gameData].options.map((option, index) => (
                         <Button key={index} onClick={handleOptionClick} className="w-full" variant="outline">
                             {option}
