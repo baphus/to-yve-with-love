@@ -1,9 +1,8 @@
 import { Heart } from "lucide-react";
 import Image from "next/image";
 
-export function SongSection({ unlocked }: { unlocked: boolean }) {
+export function SongSection() {
   const spotifySrc = "https://open.spotify.com/embed/track/5TpPSTItCwtZ8Sltr3vdzm?utm_source=generator";
-  const spotifySrcWithAutoplay = spotifySrc + "&autoplay=1";
   
   return (
     <section id="song" className="relative w-full py-20 lg:py-32 bg-primary/20 overflow-hidden">
@@ -20,12 +19,12 @@ export function SongSection({ unlocked }: { unlocked: boolean }) {
             <iframe
               id="spotify-embed"
               style={{ borderRadius: '8px' }}
-              src={unlocked ? spotifySrcWithAutoplay : spotifySrc}
+              src={spotifySrc}
               width="100%"
               height="352"
               frameBorder="0"
               allowFullScreen={false}
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
               title="Spotify Embed for 'Last Night on Earth' by Green Day"
             ></iframe>

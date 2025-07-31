@@ -50,8 +50,8 @@ export function EntryPuzzle({ onUnlock }: { onUnlock: () => void }) {
     setGameActive(false);
     cancelAnimationFrame(requestRef.current!);
 
-    // Check if the indicator is in the target zone (e.g. 37.5% to 62.5%)
-    if (indicatorPosition >= 37.5 && indicatorPosition <= 62.5) {
+    // Check if the indicator is in the target zone (e.g. 42.5% to 57.5%)
+    if (indicatorPosition >= 42.5 && indicatorPosition <= 57.5) {
       setShowSuccess(true);
       setTimeout(() => {
         setIsFadingOut(true);
@@ -85,7 +85,7 @@ export function EntryPuzzle({ onUnlock }: { onUnlock: () => void }) {
         {/* Target Zone */}
         <div
           className="absolute w-full bg-accent/30"
-          style={{ top: '37.5%', height: '25%' }}
+          style={{ top: '42.5%', height: '15%' }}
         />
         
         {/* Indicator */}

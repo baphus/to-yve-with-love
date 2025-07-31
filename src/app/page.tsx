@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { LoveLettersSection } from '@/components/sections/LoveLettersSection';
 import { MomentsSection } from '@/components/sections/MomentsSection';
@@ -11,17 +11,28 @@ import { EntryPuzzle } from '@/components/EntryPuzzle';
 
 export default function Home() {
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const songRef = useRef<HTMLIFrameElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleUnlock = () => {
     setIsUnlocked(true);
-    // The song section will now handle autoplay via its props
   };
+  
+  useEffect(() => {
+    if (isUnlocked && audioRef.current) {
+      audioRef.current.play().catch(error => {
+        // Autoplay was prevented.
+        console.error("Audio autoplay failed:", error);
+      });
+    }
+  }, [isUnlocked]);
+
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       {!isUnlocked && <EntryPuzzle onUnlock={handleUnlock} />}
       
+      <audio ref={audioRef} src="/oursong.mp3" preload="auto" />
+
       <div className={`transition-opacity duration-1000 ${isUnlocked ? 'opacity-100' : 'opacity-0'}`}>
         {/* Sticker images that will float around */}
         <Image src="/stickers/sticker1.png" alt="sticker" width={64} height={64} className="sticker top-[15%] left-[5%] -rotate-12" style={{ animationDelay: '0s' }} />
@@ -38,7 +49,7 @@ export default function Home() {
           <HeroSection />
           <LoveLettersSection />
           <MomentsSection />
-          <SongSection unlocked={isUnlocked} />
+          <SongSection />
         </main>
         <footer className="w-full bg-primary/20 py-6">
           <div className="container mx-auto flex items-center justify-center text-center">
