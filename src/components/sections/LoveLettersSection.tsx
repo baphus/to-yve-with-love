@@ -53,7 +53,7 @@ function LoveLetter({
 }) {
   return (
     <div
-      className="w-full h-64 perspective-1000"
+      className={`relative w-full h-64 perspective-1000 ${isOpen ? 'z-30' : 'z-auto'}`}
       onClick={onClick}
     >
       <div
