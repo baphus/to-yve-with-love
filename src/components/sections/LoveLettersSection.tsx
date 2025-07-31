@@ -51,33 +51,42 @@ function LoveLetter({
   onClick: () => void;
 }) {
   return (
-    <div className="w-full h-48 mb-4">
+    <div
+      className="w-full h-48 mb-4 perspective-1000"
+      onClick={onClick}
+    >
       <div
-        className="relative w-full h-full cursor-pointer group"
-        onClick={onClick}
+        className={`relative w-full h-full cursor-pointer transition-transform duration-700 ease-in-out transform-style-3d ${isOpen ? '[transform:translateY(3rem)]' : ''}`}
       >
-        {/* Letter Content */}
-        <div className={`absolute top-0 left-0 w-full h-full transition-all duration-700 ease-in-out ${isOpen ? 'bottom-24' : 'bottom-0'}`}>
-          <div className="bg-card/90 backdrop-blur-sm rounded-lg shadow-2xl border-2 border-accent/40 p-6 h-full flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-4">
-                {letter.icon}
-                <h3 className="font-headline text-xl text-primary-foreground">{letter.title}</h3>
-              </div>
-              <p className="font-body text-base text-foreground/90">{letter.content}</p>
+        {/* The Letter Itself */}
+        <div className="absolute top-0 left-0 w-full h-full bg-card/90 backdrop-blur-sm rounded-lg shadow-2xl border-2 border-accent/40 p-6 flex flex-col justify-center transition-transform duration-700 ease-out"
+            style={{ transform: isOpen ? 'translateY(-50%)' : 'translateY(0%)' }}>
+          <div className="flex items-center gap-4 mb-4">
+            {letter.icon}
+            <h3 className="font-headline text-xl text-primary-foreground">{letter.title}</h3>
           </div>
+          <p className="font-body text-base text-foreground/90">{letter.content}</p>
+        </div>
+        
+        {/* Envelope Front */}
+        <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-secondary shadow-lg flex items-center justify-center p-4 border-2 border-primary/50 overflow-hidden z-20">
+            <div className={`font-headline text-xl text-primary-foreground text-center px-4 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}>
+                <p>{letter.title}</p>
+                <p className="text-sm font-body mt-2 opacity-80">(Click to open)</p>
+            </div>
         </div>
 
-        {/* Envelope */}
-        <div className="absolute top-0 left-0 w-full h-full">
-            {/* Envelope Flap */}
-            <div className={`absolute top-0 left-0 w-full h-1/2 bg-accent/80 transition-transform duration-500 ease-in-out origin-bottom ${isOpen ? '[transform:rotateX(180deg)]' : ''}`} style={{clipPath: 'polygon(0 0, 100% 0, 50% 100%)'}}></div>
-            {/* Envelope Body */}
-            <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-secondary shadow-lg flex items-center justify-center p-4 border-2 border-primary/50 overflow-hidden">
-                <div className="font-headline text-xl text-primary-foreground text-center px-4">
-                    <p>{letter.title}</p>
-                    <p className="text-sm font-body mt-2 opacity-80">(Click to open)</p>
-                </div>
-            </div>
+        {/* Envelope Back */}
+         <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-accent/60 z-0"></div>
+
+        {/* Envelope Flap */}
+        <div 
+          className="absolute top-0 left-0 w-full h-1/2 bg-accent/80 transition-transform duration-500 ease-in-out origin-bottom z-30" 
+          style={{
+            clipPath: 'polygon(0 0, 100% 0, 50% 100%)',
+            transform: isOpen ? 'rotateX(180deg)' : 'rotateX(0deg)',
+            backfaceVisibility: 'hidden',
+          }}>
         </div>
       </div>
     </div>
