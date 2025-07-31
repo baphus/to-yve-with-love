@@ -52,7 +52,7 @@ function LoveLetter({
 }) {
   return (
     <div
-      className="w-full h-48 mb-4 perspective-1000"
+      className="w-full h-56 perspective-1000"
       onClick={onClick}
     >
       <div
@@ -110,7 +110,7 @@ export function LoveLettersSection() {
           <h2 className="font-headline text-4xl md:text-5xl text-primary-foreground">Things I Love About You</h2>
           <p className="mt-2 font-body text-lg text-foreground/80">Just a few of the countless reasons...</p>
         </div>
-         <div className="space-y-8">
+         <div className="space-y-16">
           {letters.map((letter, index) => (
              <LoveLetter 
                 key={index} 
