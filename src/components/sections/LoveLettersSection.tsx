@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Heart, MessageSquare, Smile, Star, Sun, BrainCircuit, Mail, MailOpen } from 'lucide-react';
+import { Heart, MessageSquare, Smile, Star, Sun, BrainCircuit, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const letters = [
@@ -52,46 +52,31 @@ function LoveLetter({
   onClick: () => void;
 }) {
   return (
-    <div className="w-full">
+    <div className="w-full h-48 mb-4 [perspective:1000px]">
       <div
-        className="relative w-full cursor-pointer transition-all duration-500 [perspective:1000px]"
+        className="relative w-full h-full cursor-pointer transition-transform duration-700 transform-style-3d"
         onClick={onClick}
+        style={{ transform: isOpen ? 'rotateX(180deg)' : 'none' }}
       >
-        <div
-          className={cn(
-            'w-full transform-style-3d transition-transform duration-700',
-            isOpen ? '[transform:rotateX(180deg)]' : ''
-          )}
-        >
-          {/* Front of the card (closed envelope) */}
-          <div className="absolute inset-0 backface-hidden">
-            <div className="h-48 rounded-lg bg-secondary shadow-lg flex items-center justify-center p-4 border-2 border-primary/50 relative overflow-hidden">
-               <div className="absolute top-0 left-0 w-full h-1/2 bg-accent/30" style={{clipPath: 'polygon(0 0, 100% 0, 50% 100%)'}}></div>
-               <Mail className="h-16 w-16 text-primary-foreground/50"/>
-               <p className="absolute bottom-4 font-headline text-xl text-primary-foreground">{letter.title}</p>
-            </div>
-          </div>
-
-          {/* Back of the card (opened letter) */}
-          <div className="w-full [transform:rotateX(180deg)] backface-hidden">
-            <div className="bg-card/80 backdrop-blur-sm rounded-lg shadow-2xl border-2 border-accent/40 p-6 min-h-48">
-              <div className="flex items-center gap-4 mb-4">
-                {letter.icon}
-                <h3 className="font-headline text-xl text-primary-foreground">{letter.title}</h3>
-              </div>
-              <p className="font-body text-base text-foreground/90">{letter.content}</p>
-            </div>
+        {/* Front of the card (closed envelope) */}
+        <div className="absolute w-full h-full backface-hidden">
+          <div className="h-full rounded-lg bg-secondary shadow-lg flex items-center justify-center p-4 border-2 border-primary/50 relative overflow-hidden">
+             <div className="absolute top-0 left-0 w-full h-1/2 bg-accent/30" style={{clipPath: 'polygon(0 0, 100% 0, 50% 100%)'}}></div>
+             <Mail className="h-16 w-16 text-primary-foreground/50"/>
+             <p className="absolute bottom-4 font-headline text-xl text-primary-foreground">{letter.title}</p>
           </div>
         </div>
-      </div>
-      {/* Spacer to prevent layout shift */}
-      <div
-        className={cn(
-          'overflow-hidden transition-[max-height] duration-700 ease-in-out',
-          isOpen ? 'max-h-96' : 'max-h-48'
-        )}
-      >
-        <div className="h-48" />
+
+        {/* Back of the card (opened letter) */}
+        <div className="absolute w-full h-full [transform:rotateX(180deg)] backface-hidden">
+          <div className="bg-card/80 backdrop-blur-sm rounded-lg shadow-2xl border-2 border-accent/40 p-6 h-full flex flex-col justify-center">
+            <div className="flex items-center gap-4 mb-4">
+              {letter.icon}
+              <h3 className="font-headline text-xl text-primary-foreground">{letter.title}</h3>
+            </div>
+            <p className="font-body text-base text-foreground/90">{letter.content}</p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -114,7 +99,7 @@ export function LoveLettersSection() {
           <h2 className="font-headline text-4xl md:text-5xl text-primary-foreground">Things I Love About You</h2>
           <p className="mt-2 font-body text-lg text-foreground/80">Just a few of the countless reasons...</p>
         </div>
-         <div className="space-y-[-10rem] md:space-y-[-11rem]">
+         <div className="space-y-4">
           {letters.map((letter, index) => (
              <LoveLetter 
                 key={index} 
