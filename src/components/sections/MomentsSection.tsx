@@ -4,38 +4,32 @@ import { Flower2, Sparkles } from 'lucide-react';
 
 const moments = [
   {
-    image: "https://placehold.co/600x400.png",
-    hint: "beach sunset",
+    image: "/moments/beach.png",
     title: "Our First Beach Trip",
     description: "Remember how we watched the sunset and you almost got swept away by a wave? Best day ever."
   },
   {
-    image: "https://placehold.co/600x400.png",
-    hint: "city skyline",
+    image: "/moments/city.png",
     title: "That Night in the City",
     description: "The city lights had nothing on the sparkle in your eyes. I'll never forget that dinner."
   },
   {
-    image: "https://placehold.co/600x400.png",
-    hint: "cozy home",
+    image: "/moments/furniture.png",
     title: "Building IKEA Furniture",
     description: "A true test of any relationship. We passed with flying colors (and only a few leftover screws)."
   },
   {
-    image: "https://placehold.co/600x400.png",
-    hint: "mountain hike",
+    image: "/moments/hike.png",
     title: "Conquering That Hike",
     description: "You complained for the first hour, but the view from the top (and seeing you proud) was worth it."
   },
   {
-    image: "https://placehold.co/600x400.png",
-    hint: "laughing couple",
+    image: "/moments/lazy.png",
     title: "Every Lazy Sunday",
     description: "My favorite moments are often the quiet ones, just being with you, doing nothing at all."
   },
   {
-    image: "https://placehold.co/600x400.png",
-    hint: "cooking together",
+    image: "/moments/kitchen.png",
     title: "The Great Kitchen Disaster",
     description: "We tried to make pasta from scratch. We ended up ordering pizza. 10/10 would do it again."
   }
@@ -56,14 +50,14 @@ export function MomentsSection() {
           {moments.map((moment, index) => (
             <Card key={index} className="overflow-hidden shadow-lg transition-all hover:shadow-xl hover:-translate-y-2 duration-300 bg-card border-accent/20">
               <CardContent className="p-0">
-                <Image
-                  src={moment.image}
-                  alt={moment.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-cover aspect-[3/2]"
-                  data-ai-hint={moment.hint}
-                />
+                <div className="aspect-[3/2] w-full relative">
+                  <Image
+                    src={moment.image}
+                    alt={moment.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </CardContent>
               <CardHeader>
                 <CardTitle className="font-headline text-xl text-primary-foreground">{moment.title}</CardTitle>
