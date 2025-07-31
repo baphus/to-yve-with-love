@@ -87,7 +87,8 @@ body {
 }
 
 @keyframes stop-motion-tilt {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-4deg);
   }
   50% {
@@ -96,6 +97,6 @@ body {
 }
 
 .sticker {
-    @apply absolute w-16 h-16 drop-shadow-lg;
-    animation: stop-motion-tilt 0.5s steps(2, jump-none) infinite;
+  @apply absolute drop-shadow-lg;
+  animation: stop-motion-tilt 2s ease-in-out infinite alternate;
 }
