@@ -20,6 +20,9 @@ export function HeroSection() {
       </div>
       
       <div className="container z-10 flex flex-col items-center text-center px-4">
+        <h2 className="font-body text-2xl md:text-3xl text-accent-foreground drop-shadow-md mb-4">
+          Happy Girlfriend's Day!
+        </h2>
         
         <div className="relative w-full max-w-3xl aspect-[16/9] mb-8 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/80">
           <Image 

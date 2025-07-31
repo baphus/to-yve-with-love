@@ -109,6 +109,18 @@ export function LoveLettersSection() {
 
   return (
     <section id="love-letters" className="relative w-full py-20 lg:py-32 bg-primary/20 overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-20">
+            <Image src="/stickers/sticker1.png" alt="sticker" width={56} height={56} className="sticker top-[5%] left-[10%]" style={{ animationDelay: '0.1s' }} />
+            <Image src="/stickers/sticker3.png" alt="sticker" width={72} height={72} className="sticker top-[15%] right-[8%]" style={{ animationDelay: '0.3s' }} />
+            <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker bottom-[15%] left-[12%]" style={{ animationDelay: '0.5s' }} />
+            <Image src="/stickers/sticker7.png" alt="sticker" width={60} height={60} className="sticker bottom-[5%] right-[10%]" style={{ animationDelay: '0.7s' }} />
+            <Image src="/stickers/sticker8.png" alt="sticker" width={80} height={80} className="sticker top-[50%] right-[5%]" style={{ animationDelay: '0.9s' }} />
+            <Image src="/stickers/sticker9.png" alt="sticker" width={68} height={68} className="sticker bottom-[25%] right-[20%]" style={{ animationDelay: '1.1s' }} />
+            <Image src="/stickers/sticker10.png" alt="sticker" width={50} height={50} className="sticker top-[55%] left-[15%]" style={{ animationDelay: '1.3s' }} />
+            <Image src="/stickers/sticker2.png" alt="sticker" width={64} height={64} className="sticker top-[10%] right-[25%] rotate-12" style={{ animationDelay: '1.5s' }} />
+            <Image src="/stickers/sticker6.png" alt="sticker" width={80} height={80} className="sticker bottom-[10%] left-[5%] -rotate-12" style={{ animationDelay: '1.7s' }} />
+            <Image src="/stickers/sticker4.png" alt="sticker" width={72} height={72} className="sticker top-[35%] left-[8%]" style={{ animationDelay: '1.9s' }} />
+      </div>
       <div className="container mx-auto max-w-3xl px-4 z-10">
         <div className="text-center mb-16">
           <h2 className="font-headline text-4xl md:text-5xl text-primary-foreground">Things I Love About You</h2>
