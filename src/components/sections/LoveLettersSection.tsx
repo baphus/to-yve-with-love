@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Heart, MessageSquare, Smile, Star, Sun, BrainCircuit } from 'lucide-react';
+import Image from 'next/image';
 
 const letters = [
   {
@@ -102,6 +103,11 @@ export function LoveLettersSection() {
 
   return (
     <section id="love-letters" className="relative w-full py-20 lg:py-32 bg-primary/20 overflow-hidden">
+      <Image src="/stickers/sticker1.png" alt="sticker" width={56} height={56} className="sticker top-[5%] left-[10%]" style={{ animationDelay: '0.1s' }} />
+      <Image src="/stickers/sticker3.png" alt="sticker" width={72} height={72} className="sticker top-[20%] right-[8%]" style={{ animationDelay: '0.3s' }} />
+      <Image src="/stickers/sticker5.png" alt="sticker" width={64} height={64} className="sticker bottom-[15%] left-[12%]" style={{ animationDelay: '0.5s' }} />
+      <Image src="/stickers/sticker7.png" alt="sticker" width={60} height={60} className="sticker bottom-[5%] right-[10%]" style={{ animationDelay: '0.7s' }} />
+
       <div className="container mx-auto max-w-3xl px-4 z-10">
         <div className="text-center mb-16">
           <h2 className="font-headline text-4xl md:text-5xl text-primary-foreground">Things I Love About You</h2>
